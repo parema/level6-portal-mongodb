@@ -1,0 +1,10 @@
+entity Project{
+	projectName String
+}
+entity ComputeGroup{
+	computeGroupName String
+}
+
+relationship OneToMany{
+	Project{computeGroups} to ComputeGroup{parent}
+}
