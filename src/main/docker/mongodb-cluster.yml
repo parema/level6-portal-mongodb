@@ -1,0 +1,16 @@
+version: '2'
+services:
+  level6-mongodb:
+    image: mongo:4.0.9
+    ports:
+      - '27017:27017'
+    command: mongos --configdb level6-mongodb-config
+  level6-mongodb-node:
+    build:
+      context: .
+      dockerfile: mongodb/MongoDB.Dockerfile
+    command: mongod --replSet rs1 --noprealloc --smallfiles
+  level6-mongodb-config:
+    image: mongo:4.0.9
+    container_name: level6-mongodb-config
+    command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db
